@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Altiers - Главная</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
 </head>
 
 <body>
@@ -24,10 +23,10 @@
                 <nav>
                     <ul class="nav-buttons">
                         <li class="nav-button" data-nav="main">
-                            <a href="#" class="active">Главная</a>
+                            <a href="#" class="nav-link active">Главная</a>
                         </li>
                         <li class="nav-button" data-nav="catalog">
-                            <a href="catalog.html" class="nav-link.active" data-nav="catalog">Каталог</a>
+                            <a href="basket.html" class="nav-link" data-nav="catalog">Корзина</a>
                         </li>
                     </ul>
                 </nav>
@@ -37,9 +36,6 @@
                         <input type="text" class="search-input" placeholder="Поиск товаров и категорий..."
                             aria-label="Поиск товаров">
 
-                        <button class="search-button" type="submit" aria-label="Найти">
-                            <span class="search-icon">🔍</span>
-                        </button>
                     </div>
 
                     <div class="search-suggestions">
@@ -56,39 +52,41 @@
     <main class="container">
 
         <!-- карточка 1 -->
-        <div class="product-card">
-            <img src="card/1.webp" alt="картинка 1">
-            <h3>Худи мужское</h3>
-            <p class="price">1500 руб.</p>
-            <button class="btn add-to-cart">В корзину</button>
-        </div>
+        <div class="wb-product-card">
+            <div class="wb-product-image">
+                <img src="https://basket-06.wbbasket.ru/vol1017/part101759/101759784/images/c516x688/1.webp" alt="Худи мужское" class="wb-product-img">
+                <div class="wb-product-badges">
+                    <span class="wb-badge wb-badge-new">NEW</span>
+                    <span class="wb-badge wb-badge-sale">-15%</span>
+                </div>
+                <button class="wb-wishlist-btn" aria-label="Добавить в избранное">
+                    <span class="wb-wishlist-icon">❤️</span>
+                </button>
+            </div>
 
-        <!-- карточка 2 -->
-        <div class="product-card">
-            <img src="card/2.webp" alt="картинка 2">
-            <h3>Шорты мужские</h3>
-            <p class="price">2000 руб.</p>
-            <button class="btn">В корзину</button>
-        </div>
+            <div class="wb-product-info">
+                <h3 class="wb-product-title">Худи мужское</h3>
 
-        <!-- карточка 3 -->
-        <div class="product-card">
-            <img src="card/3.webp" alt="картинка 3">
-            <h3>Футболка мужская</h3>
-            <p class="price">999 руб.</p>
-            <button class="btn">В корзину</button>
-        </div>
+                <div class="wb-product-rating">
+                    <div class="wb-stars">★★★★★</div>
+                    <span class="wb-reviews">(1253)</span>
+                </div>
 
-        <!-- карточка 4 -->
-        <div class="product-card">
-            <img src="card/4.webp" alt="картинка 4">
-            <h3>Джинсы мужские</h3>
-            <p class="price">3200 руб.</p>
-            <button class="btn">В корзину</button>
-        </div>
+                <div class="wb-product-prices">
+                    <span class="wb-price-current">1500</span>
+                    <span class="wb-price-old">2600</span>
+                </div>
 
-        </div>
-        </section>
+                <div class="wb-product-delivery">
+                    <span class="wb-delivery-text">Бесплатная доставка</span>
+                </div>
+
+                <button class="wb-add-to-cart-btn" data-product-id="1">
+                    <span class="wb-cart-icon">🛒</span>В корзину
+                </button>
+            </div>
+    </div>
+
 
     </main>
 
