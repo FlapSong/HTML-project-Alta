@@ -7,6 +7,7 @@
     <title>Altiers - Главная</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="product card-style.css">
+    <link rel="stylesheet" href="basket-btn.css">
 </head>
 
 <body>
@@ -15,19 +16,16 @@
     <header class="shop-header">
         <div class="header-container">
             <div class="header-left">
+                <!-- логотип и навигация -->
                 <div class="logo">
                     <span class="logo-icon"></span>
                     <span class="logo-text">Altiers</span>
-
                 </div>
 
                 <nav>
                     <ul class="nav-buttons">
                         <li class="nav-button" data-nav="main">
                             <a href="#" class="nav-link active">Главная</a>
-                        </li>
-                        <li class="nav-button" data-nav="catalog">
-                            <a href="basket.html" class="nav-link" data-nav="catalog">Корзина</a>
                         </li>
                     </ul>
                 </nav>
@@ -36,24 +34,31 @@
                     <div class="search-box">
                         <input type="text" class="search-input" placeholder="Поиск товаров и категорий..."
                             aria-label="Поиск товаров">
-
                     </div>
 
                     <div class="search-suggestions">
                         <div class="suggestion-item">Худи мужские</div>
                         <div class="suggestion-item">Шорты мужские</div>
-                        <div class="suggestion-item">Футболка мужская</div>
-                        <div class="suggestion-item">Джинсы мужские</div>
+                        <div class="suggestion-item">Футболки мужские</div>
+                        <div class="suggestion-item">Кроссовки мужские</div>
                     </div>
                 </div>
+            </div>
+
+            <!-- ПРАВАЯ ЧАСТЬ ШАПКИ-КОРЗИНА -->
+            <div class="header-right">
+                <a href="basket.html" class="cart-header-btn">
+                    <span class="cart-icon">🛒</span>
+                    <span class="cart-text">Корзина</span>
+                    <span class="cart-count">0</span>
+                </a>
             </div>
         </div>
     </header>
 
     <main class="container">
-
         <div class="wb-products-grid">
-
+            
             <!-- карточка 1 -->
             <div class="wb-product-card">
                 <div class="wb-product-image">
@@ -70,28 +75,22 @@
 
                 <div class="wb-product-info">
                     <h6 class="wb-product-title">Худи мужское</h6>
-
                     <div class="wb-product-rating">
                         <div class="wb-stars">★★★★★</div>
                         <span class="wb-reviews">(1253)</span>
                     </div>
-
                     <div class="wb-product-prices">
                         <span class="wb-price-current">2200руб</span>
                         <span class="wb-price-old">2600</span>
                     </div>
-
                     <div class="wb-product-delivery">
                         <span class="wb-delivery-text">Бесплатная доставка</span>
                     </div>
-
                     <button class="wb-add-to-cart-btn" data-product-id="1">
                         <span class="wb-cart-icon">🛒</span>В корзину
                     </button>
                 </div>
             </div>
-
-
 
             <!-- карточка 2 -->
             <div class="wb-product-card">
@@ -109,69 +108,91 @@
 
                 <div class="wb-product-info">
                     <h6 class="wb-product-title">Футболка мужская</h6>
-
                     <div class="wb-product-rating">
                         <div class="wb-stars">★★★★★</div>
-                        <span class="wb-reviews">(1253)</span>
+                        <span class="wb-reviews">(857)</span>
                     </div>
-
                     <div class="wb-product-prices">
                         <span class="wb-price-current">940руб</span>
                         <span class="wb-price-old">1200</span>
                     </div>
-
                     <div class="wb-product-delivery">
                         <span class="wb-delivery-text">Бесплатная доставка</span>
                     </div>
-
-                    <button class="wb-add-to-cart-btn" data-product-id="1">
+                    <button class="wb-add-to-cart-btn" data-product-id="2">
                         <span class="wb-cart-icon">🛒</span>В корзину
                     </button>
                 </div>
             </div>
-        </div>
 
-
-        <!-- карточка 3 -->
-        <div class="wb-product-card">
-            <div class="wb-product-image">
-                <img src="https://i.pinimg.com/736x/7c/fd/c8/7cfdc8eb538f2830739edb945aa8dbee.jpg"
-                    alt="Шорты мужские" class="wb-product-img">
-                <div class="wb-product-badges">
-                    <span class="wb-badge wb-badge-new">NEW</span>
-                    <span class="wb-badge wb-badge-sale">-25%</span>
+            <!-- карточка 3 -->
+            <div class="wb-product-card">
+                <div class="wb-product-image">
+                    <img src="https://i.pinimg.com/736x/7c/fd/c8/7cfdc8eb538f2830739edb945aa8dbee.jpg" alt="Шорты мужские"
+                        class="wb-product-img">
+                    <div class="wb-product-badges">
+                        <span class="wb-badge wb-badge-new">NEW</span>
+                        <span class="wb-badge wb-badge-sale">-25%</span>
+                    </div>
+                    <button class="wb-wishlist-btn" aria-label="Добавить в избранное">
+                        <span class="wb-wishlist-icon">❤️</span>
+                    </button>
                 </div>
-                <button class="wb-wishlist-btn" aria-label="Добавить в избранное">
-                    <span class="wb-wishlist-icon">❤️</span>
-                </button>
+
+                <div class="wb-product-info">
+                    <h6 class="wb-product-title">Шорты мужские</h6>
+                    <div class="wb-product-rating">
+                        <div class="wb-stars">★★★★★</div>
+                        <span class="wb-reviews">(589)</span>
+                    </div>
+                    <div class="wb-product-prices">
+                        <span class="wb-price-current">750руб</span>
+                        <span class="wb-price-old">999руб</span>
+                    </div>
+                    <div class="wb-product-delivery">
+                        <span class="wb-delivery-text">Бесплатная доставка</span>
+                    </div>
+                    <button class="wb-add-to-cart-btn" data-product-id="3">
+                        <span class="wb-cart-icon">🛒</span>В корзину
+                    </button>
+                </div>
             </div>
 
-            <div class="wb-product-info">
-                <h6 class="wb-product-title">Шорты мужские</h6>
-
-                <div class="wb-product-rating">
-                    <div class="wb-stars">★★★★★</div>
-                    <span class="wb-reviews">(589)</span>
+            <!-- карточка 4 -->
+            <div class="wb-product-card">
+                <div class="wb-product-image">
+                    <img src="https://i.pinimg.com/736x/9d/83/60/9d8360688e9037131add90178c3da210.jpg"
+                        alt="Кроссовки мужские" class="wb-product-img">
+                    <div class="wb-product-badges">
+                        <span class="wb-badge wb-badge-new">NEW</span>
+                        <span class="wb-badge wb-badge-sale">-14%</span>
+                    </div>
+                    <button class="wb-wishlist-btn" aria-label="Добавить в избранное">
+                        <span class="wb-wishlist-icon">❤️</span>
+                    </button>
                 </div>
 
-                <div class="wb-product-prices">
-                    <span class="wb-price-current">750руб</span>
-                    <span class="wb-price-old">999руб</span>
+                <div class="wb-product-info">
+                    <h6 class="wb-product-title">Кроссовки мужские</h6>
+                    <div class="wb-product-rating">
+                        <div class="wb-stars">★★★★★</div>
+                        <span class="wb-reviews">(2387)</span>
+                    </div>
+                    <div class="wb-product-prices">
+                        <span class="wb-price-current">2580руб</span>
+                        <span class="wb-price-old">2999руб</span>
+                    </div>
+                    <div class="wb-product-delivery">
+                        <span class="wb-delivery-text">Бесплатная доставка</span>
+                    </div>
+                    <button class="wb-add-to-cart-btn" data-product-id="4">
+                        <span class="wb-cart-icon">🛒</span>В корзину
+                    </button>
                 </div>
-
-                <div class="wb-product-delivery">
-                    <span class="wb-delivery-text">Бесплатная доставка</span>
-                </div>
-
-                <button class="wb-add-to-cart-btn" data-product-id="1">
-                    <span class="wb-cart-icon">🛒</span>В корзину
-                </button>
             </div>
-        </div>
 
-
+        </div> 
     </main>
-
 
     <footer>
         <div class="container">
