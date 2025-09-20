@@ -1,51 +1,52 @@
-// Добавьте этот код для работы счетчика корзины
 document.addEventListener("DOMContentLoaded", function () {
-  // Функция для обновления счетчика корзины
   function updateCartCounter() {
-    // Получаем текущее состояние корзины из localStorage
     const cart = JSON.parse(
       localStorage.getItem("shopCart") || '{"items": [], "totalCount": 0}'
     );
     const cartCount = document.querySelector(".cart-count");
 
     if (cartCount) {
-      cartCount.textContent = cart.totalCount;
+      const previousCount = parseInt(cartCount.textContent) || 0;
+      const newCount = cart.totalCount;
+
+      cartCount.textContent = newCount;
+
+      // Анимация изменения счетчика
+      if (newCount !== previousCount) {
+        cartCount.classList.add("cart-count-update");
+        setTimeout(() => {
+          cartCount.classList.remove("cart-count-update");
+        }, 300);
+      }
 
       // Показываем/скрываем счетчик
-      if (cart.totalCount > 0) {
+      if (newCount > 0) {
         cartCount.style.display = "flex";
+
+        // Добавляем класс для большого количества
+        if (newCount > 9) {
+          cartCount.classList.add("high-count");
+        } else {
+          cartCount.classList.remove("high-count");
+        }
+
+        // Анимация добавления
         cartCount.classList.add("cart-add-animation");
-        setTimeout(() => cartCount.classList.remove("cart-add-animation"), 500);
+        setTimeout(() => {
+          cartCount.classList.remove("cart-add-animation");
+        }, 500);
       } else {
         cartCount.style.display = "none";
       }
     }
   }
 
-  // Обновляем счетчик при загрузке страницы
+  // Обновляем счетчик при загрузке
   updateCartCounter();
+
+  window.addEventListener("storage", function (e) {
+    if (e.key === "shopCart") {
+      updateCartCounter();
+    }
+  });
 });
-
-// Анимация добавления в корзину
-const cartAddAnimation = `
-@keyframes cartBounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: scale(1);
-    }
-    40% {
-        transform: scale(1.3);
-    }
-    60% {
-        transform: scale(1.1);
-    }
-}
-
-.cart-add-animation {
-    animation: cartBounce 0.5s ease;
-}
-`;
-
-// Добавляем стили анимации
-const style = document.createElement("style");
-style.textContent = cartAddAnimation;
-document.head.appendChild(style);
