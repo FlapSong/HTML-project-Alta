@@ -5,16 +5,19 @@ class ProductSearch {
     this.searchSuggestions = document.querySelector(".search-suggestions");
     this.productsGrid = document.querySelector(".wb-products-grid");
     this.allProducts = [];
+    this.searchTimeout = null;
 
     this.init();
   }
 
   init() {
     if (!this.searchInput) {
+      console.log("Search input not found");
       return;
     }
 
     if (!this.productsGrid) {
+      console.log("Products grid not found");
       return;
     }
 
@@ -30,7 +33,7 @@ class ProductSearch {
       return {
         element: card,
         title: titleElement ? titleElement.textContent.toLowerCase() : "",
-        originalDisplay: window.getComputedStyle(card).display,
+        originalDisplay: card.style.display || "block",
         index: index,
       };
     });
@@ -46,18 +49,32 @@ class ProductSearch {
     this.searchInput.addEventListener("keypress", (e) => {
       if (e.key === "Enter") {
         this.performSearch(e.target.value);
-      }
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!e.target.closest(".search-container")) {
         this.hideSuggestions();
       }
     });
 
+    // Клик вне области поиска
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".header-search")) {
+        this.hideSuggestions();
+      }
+    });
+
+    // Фокус на поле ввода
     this.searchInput.addEventListener("focus", () => {
       this.showSuggestions(this.searchInput.value);
     });
+
+    // Обработка кликов по подсказкам
+    if (this.searchSuggestions) {
+      this.searchSuggestions.addEventListener('click', (e) => {
+        if (e.target.classList.contains('suggestion-item')) {
+          this.searchInput.value = e.target.textContent;
+          this.performSearch(e.target.textContent);
+          this.hideSuggestions();
+        }
+      });
+    }
   }
 
   handleSearchInput(query) {
@@ -81,26 +98,26 @@ class ProductSearch {
 
     const suggestions = this.getSuggestions(query);
     this.renderSuggestions(suggestions);
-    this.searchSuggestions.style.display = "block";
+    this.searchSuggestions.classList.add('show');
   }
 
   getSuggestions(query) {
     const lowerQuery = query.toLowerCase();
     const allSuggestions = [
-      "худи",
-      "футболка",
-      "шорты",
-      "джинсы",
-      "кроссовки",
-      "куртка",
-      "рубашка",
-      "штаны",
-      "шапка",
-      "свитшот",
+      "худи мужское",
+      "футболка мужская", 
+      "шорты мужские",
+      "джинсы мужские",
+      "кроссовки мужские",
+      "куртка мужская",
+      "рубашка мужская",
+      "штаны мужские",
+      "шапка мужская",
+      "свитшот мужской",
     ];
 
     return allSuggestions
-      .filter((item) => item.includes(lowerQuery))
+      .filter((item) => item.toLowerCase().includes(lowerQuery))
       .slice(0, 5);
   }
 
@@ -109,22 +126,29 @@ class ProductSearch {
 
     this.searchSuggestions.innerHTML = "";
 
+    if (suggestions.length === 0) {
+      const noResults = document.createElement("div");
+      noResults.className = "suggestion-item";
+      noResults.textContent = "Ничего не найдено";
+      noResults.style.color = "#999";
+      noResults.style.cursor = "default";
+      noResults.onclick = null;
+      this.searchSuggestions.appendChild(noResults);
+      return;
+    }
+
     suggestions.forEach((suggestion) => {
       const item = document.createElement("div");
       item.className = "suggestion-item";
-      item.textContent =
-        suggestion.charAt(0).toUpperCase() + suggestion.slice(1);
-      item.onclick = () => {
-        this.searchInput.value = suggestion;
-        this.performSearch(suggestion);
-        this.hideSuggestions();
-      };
+      item.textContent = suggestion;
+      item.setAttribute('data-search', suggestion.toLowerCase());
       this.searchSuggestions.appendChild(item);
     });
   }
 
   performSearch(query) {
     const searchTerm = query.toLowerCase().trim();
+    
     if (searchTerm === "") {
       this.showAllProducts();
       return;
@@ -133,6 +157,7 @@ class ProductSearch {
     const results = this.allProducts.filter((product) =>
       product.title.includes(searchTerm)
     );
+    
     this.displaySearchResults(results, searchTerm);
   }
 
@@ -144,7 +169,7 @@ class ProductSearch {
 
     // Показываем результаты
     results.forEach((result) => {
-      result.element.style.display = result.originalDisplay;
+      result.element.style.display = "block";
     });
 
     this.showSearchMessage(results.length, query);
@@ -152,7 +177,7 @@ class ProductSearch {
 
   showAllProducts() {
     this.allProducts.forEach((product) => {
-      product.element.style.display = product.originalDisplay;
+      product.element.style.display = "block";
     });
     this.hideSearchMessage();
   }
@@ -162,17 +187,25 @@ class ProductSearch {
 
     const message = document.createElement("div");
     message.className = "search-message";
+    message.style.cssText = `
+      text-align: center;
+      padding: 2rem;
+      margin: 2rem 0;
+      background: #f8f9fa;
+      border-radius: 12px;
+      border: 1px solid #e9ecef;
+    `;
 
     if (resultsCount === 0) {
       message.innerHTML = `
-                <h3>😔 Ничего не найдено</h3>
-                <p>По запросу "<strong>${query}</strong>" товаров не найдено.</p>
-            `;
+        <h3 style="color: #6c757d; margin-bottom: 1rem;">😔 Ничего не найдено</h3>
+        <p style="color: #495057; margin: 0;">По запросу "<strong>${query}</strong>" товаров не найдено.</p>
+      `;
     } else {
       message.innerHTML = `
-                <h3>🎉 Найдено товаров: ${resultsCount}</h3>
-                <p>Результаты по запросу: "<strong>${query}</strong>"</p>
-            `;
+        <h3 style="color: #28a745; margin-bottom: 1rem;">🎉 Найдено товаров: ${resultsCount}</h3>
+        <p style="color: #495057; margin: 0;">Результаты по запросу: "<strong>${query}</strong>"</p>
+      `;
     }
 
     if (this.productsGrid && this.productsGrid.parentNode) {
@@ -189,16 +222,12 @@ class ProductSearch {
 
   hideSuggestions() {
     if (this.searchSuggestions) {
-      this.searchSuggestions.style.display = "none";
+      this.searchSuggestions.classList.remove('show');
     }
   }
 }
 
-// Простая инициализация
+// Инициализация при загрузке DOM
 document.addEventListener("DOMContentLoaded", function () {
-  setTimeout(() => {
-    try {
-      window.productSearch = new ProductSearch();
-    } catch (error) {}
-  }, 500);
+  new ProductSearch();
 });

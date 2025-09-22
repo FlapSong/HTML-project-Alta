@@ -9,65 +9,65 @@
   <link rel="stylesheet" href="css/product card-style.css">
   <link rel="stylesheet" href="css/basket-btn.css">
   <link rel="stylesheet" href="css/login-btn.css">
-  <script src="js/basket-btn.js"></script>
-  <script src="js/scroll header.js"></script>
-
-
+  <link rel="stylesheet" href="css/header.css">
 </head>
 
 <body>
-  <header class="shop-header">
+  <!-- Исправленная шапка -->
+  <header class="site-header">
+    <div class="header-gradient"></div>
     <div class="header-container">
-      <div class="header-left">
 
-        <!-- логотип и навигация -->
-        <div class="logo" onclick="window.location.href ='index.html'" style="cursor: pointer;">
-          <span class="logo-icon"></span>
-          <span class="logo-text">Altiers</span>
+      <!-- Логотип -->
+      <div class="header-logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+        <span class="logo-text">Altiers</span>
+      </div>
+
+      <!-- Поиск-->
+      <div class="header-search">
+        <div class="search-box">
+          <input type="text" class="search-input" placeholder="Поиск товаров и категорий..."
+            aria-label="Поиск товаров" id="searchInput">
         </div>
 
-        <div class="search-container">
-          <div class="search-box">
-            <input type="text" class="search-input" placeholder="Поиск товаров и категорий..."
-              aria-label="Поиск товаров" id="searchInput">
-          </div>
-
-          <div class="search-suggestions">
-            <div class="suggestion-item" data-search="худи">Худи мужские</div>
-            <div class="suggestion-item" data-search="футболка">Футболки мужские</div>
-            <div class="suggestion-item" data-search="шорты">Шорты мужские</div>
-          </div>
+        <div class="search-suggestions">
+          <div class="suggestion-item" data-search="худи">Худи мужские</div>
+          <div class="suggestion-item" data-search="футболка">Футболки мужские</div>
+          <div class="suggestion-item" data-search="шорты">Шорты мужские</div>
+          <div class="suggestion-item" data-search="кроссовки">Кроссовки мужские</div>
+          <div class="suggestion-item" data-search="джинсы">Джинсы мужские</div>
         </div>
+      </div>
 
-        <!-- правая часть шапки-->
-        <div class="header-right">
-          <!-- Кнопка Войти -->
-          <button class="login-btn" id="loginButton">
-            <span class="login-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-            </span>
-            <span class="login-text">Войти</span>
-          </button>
+      <!-- Кнопки действий -->
+      <div class="header-actions">
+        <!-- Кнопка Войти -->
+        <button class="header-btn" id="loginButton">
+          <span class="login-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </span>
+          <span class="login-text">Войти</span>
+        </button>
 
-          <!-- Кнопка Корзина -->
-          <a href="basket.html" class="cart-header-btn" title="Перейти в корзину">
-            <span class="cart-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4m-.4-2L7 13m0 0l-1.3 6.5a2 2 0 00.7 2.1 2 2 0 002.1.4h9.1a2 2 0 002.1-.4 2 2 0 00.7-2.1L17 13">
-                </path>
-
-                <circle cx="9" cy="19" r="1"></circle>
-                <circle cx="17" cy="19" r="1"></circle>
-              </svg>
-            </span>
-            <span class="cart-text">Корзина</span>
-            <span class="cart-count">0</span>
-          </a>
-        </div>
+        <!-- Кнопка Корзина -->
+        <a href="basket.html" class="header-btn primary" title="Перейти в корзину">
+          <span class="cart-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4m-.4-2L7 13m0 0l-1.3 6.5a2 2 0 00.7 2.1 2 2 0 002.1.4h9.1a2 2 0 002.1-.4 2 2 0 00.7-2.1L17 13">
+              </path>
+              <circle cx="9" cy="19" r="1"></circle>
+              <circle cx="17" cy="19" r="1"></circle>
+            </svg>
+          </span>
+          <span class="cart-text">Корзина</span>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+    </div>
   </header>
 
   <main class="container">
@@ -103,7 +103,7 @@
         </div>
       </div>
 
-      <!-- карточка 2 -->
+       <!-- карточка 2 -->
       <div class="wb-product-card">
         <div class="wb-product-image">
           <img src="https://cdn1.ozone.ru/s3/multimedia-y/6338760862.jpg" alt="Мужская футболка"
@@ -401,7 +401,9 @@
       <p>&copy; 2025 Altiers. Все права защищены.</p>
     </div>
   </footer>
-  <script src="js/search.js"></script>
+  <script  src="js/search.js"></script>
+  <script src="js/basket-btn.js"></script>
+  <script src="js/scroll header.js"></script>
 </body>
 
 </html>
