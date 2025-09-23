@@ -1,0 +1,338 @@
+/*  header стиль*/
+.wb-header {
+  background: linear-gradient(45deg, #ff6b35, #ff3d00);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.wb-login-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-family: "Montserrat", "Arial", sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #ff3d00;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  gap: 6px;
+}
+
+.wb-login-btn:hover {
+  background: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(255, 61, 0, 0.2);
+}
+
+.wb-login-icon {
+  font-size: 1.1rem;
+}
+
+/* модал. окно */
+.wb-auth-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.wb-auth-modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wb-auth-content {
+  background: #fff;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90vw;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease;
+  position: relative;
+}
+
+/* загаловок */
+.wb-auth-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.wb-auth-title {
+  font-family: "Montserrat", "Arial", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #000;
+  margin: 0;
+}
+
+.wb-auth-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.wb-auth-close:hover {
+  background: #f5f5f5;
+  color: #000;
+}
+
+/* форма */
+.wb-auth-form {
+  padding: 24px;
+  display: none;
+}
+
+.wb-auth-form.active {
+  display: block;
+}
+
+.wb-form-group {
+  margin-bottom: 16px;
+}
+
+.wb-form-label {
+  display: block;
+  font-family: "Montserrat", "Arial", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500px;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.wb-form-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-family: "Montserrat", "Arial", sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.wb-form-input::placeholder {
+  color: #999;
+}
+
+.wb-form-hint {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* загаловок для формы кода */
+.wb-code-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.wb-back-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #ff3d00;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.wb-back-btn:hover {
+  background: #f5f5f5;
+}
+
+.wb-code-info {
+  flex: 1;
+}
+
+.wb-code-phone {
+  font-family: "Montserrat", "Arial", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.wb-change-phone {
+  background: none;
+  border: none;
+  color: #ff3d00;
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.wb-change-phone:hover {
+  color: #ff6b35;
+}
+
+/* поля для ввода кода */
+.wb-code-input {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.wb-code-input:focus {
+  border-color: #ff3d00;
+  box-shadow: 0 0 0 2px rgba(255, 61, 0, 0.1);
+  outline: none;
+}
+
+.wb-code-input.filled {
+  border-color: #00a046;
+}
+
+.wb-code-timer {
+  font-size: 0.8rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.wb-resend-code {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 0.8rem;
+  cursor: pointer;
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.wb-resend-code:not(:disabled) {
+  color: #ff3d00;
+}
+
+.wb-resend-code:not(:disabled):hover {
+  background: #f5f5f5;
+}
+
+/* кнопка входа */
+.wb-auth-submit {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(45deg, #ff6b35, #ff3d00);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+
+.wb-auth-submit:hover {
+  background: linear-gradient(45deg, #ff3d00, #ff6b35);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 61, 0, 0.3);
+}
+
+.wb-auth-submit:active {
+  transform: translateY(0);
+}
+
+.wb-auth-submit:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* соглашение */
+.wb-auth-agreement {
+  font-size: 0.75rem;
+  color: #666;
+  text-align: center;
+  margin-top: 16px;
+  line-height: 1.4;
+}
+
+.wb-agreement-link {
+  color: #ff3d00;
+  text-decoration: none;
+}
+
+.wb-agreement-link:hover {
+  text-decoration: underline;
+}
+
+/* анимации */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+  .wb-auth-content {
+    width: 95vw;
+    margin: 20px;
+  }
+
+  .wb-auth-header {
+    padding: 15px 20px;
+  }
+
+  .wb-auth-form {
+    padding: 20px;
+  }
+
+  .wb-code-inputs {
+    justify-content: center;
+  }
+
+  .wb-code-input {
+    width: 45px;
+    height: 45px;
+  }
+}

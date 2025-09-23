@@ -9,6 +9,9 @@ body {
   background-color: whitesmoke;
   color: #333;
   line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .container {
@@ -16,6 +19,11 @@ body {
   max-width: 1600px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+main {
+  flex: 1;
+  width: 100%;
 }
 
 .header-left {
@@ -159,7 +167,8 @@ footer {
   color: white;
   text-align: center;
   padding: 2rem 0;
-  margin-top: 3rem;
+  margin-top: auto;
+  width: 100%;
 }
 
 /* Дополнительные эффекты для кнопок */
@@ -186,286 +195,6 @@ nav ul li a {
 
 nav ul li a.active {
   animation: pulse 2s infinite;
-}
-
-/* Стили для строки поиска */
-.search-container {
-  position: relative;
-  max-width: 600px;
-  left: -16px;
-  top: 1px;
-  flex: 1;
-}
-
-.search-box {
-  display: flex;
-  align-items: center;
-  background: linear-gradient(145deg, #ffffff, #f8f9fa);
-  border-radius: 30px;
-  padding: 0.5rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(255, 255, 255, 0.2),
-    inset 0 2px 4px rgba(255, 255, 255, 0.8);
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  height: 50px;
-  width: 470px;
-}
-
-.search-box:focus-within {
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15),
-    0 0 0 3px rgba(255, 255, 255, 0.3), inset 0 2px 6px rgba(255, 255, 255, 0.9);
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.6);
-}
-
-.search-input {
-  flex: 1;
-  border: none;
-  outline: none;
-  padding: 0.7rem 1rem;
-  font-size: 0.9rem;
-  background: transparent;
-  color: #2c3e50;
-  font-weight: 500;
-  min-width: 0;
-}
-
-.search-input::placeholder {
-  color: #6c757d;
-  font-weight: 400;
-  transition: all 0.3s ease;
-}
-
-.search-input:focus::placeholder {
-  transform: translateX(10px);
-  opacity: 0.7;
-}
-
-/* Эффект волны при фокусе */
-.search-box::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255, 193, 7, 0.1);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: all 0.6s ease;
-  opacity: 0;
-}
-
-.search-box:focus-within::after {
-  width: 100%;
-  height: 100%;
-  opacity: 1;
-}
-
-/* Выпадающие подсказки */
-.search-suggestions {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: white;
-  border-radius: 20px;
-  margin-top: 1rem;
-  padding: 1rem 0;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
-  z-index: 1000;
-  backdrop-filter: blur(20px);
-  background: rgba(255, 255, 255, 0.95);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  width: 470px;
-}
-
-.search-box:focus-within + .search-suggestions {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.suggestion-item {
-  padding: 0.8rem 1.5rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  color: #2c3e50;
-  font-weight: 500;
-}
-
-.suggestion-item:hover {
-  background: linear-gradient(
-    145deg,
-    rgba(255, 193, 7, 0.1),
-    rgba(255, 193, 7, 0.05)
-  );
-  color: #ffc107;
-  padding-left: 2rem;
-}
-
-/* Микро-анимация для поиска */
-@keyframes searchPulse {
-  0%,
-  100% {
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(255, 193, 7, 0.1);
-  }
-  50% {
-    box-shadow: 0 8px 35px rgba(255, 193, 7, 0.2),
-      0 0 0 3px rgba(255, 193, 7, 0.15);
-  }
-}
-
-.search-box {
-  will-change: transform, box-shadow;
-  animation: searchPulse 3s ease-in-out infinite;
-}
-
-/* Адаптивность */
-@media (max-width: 1024px) {
-  .search-container {
-    max-width: 500px;
-    margin: 0 2rem;
-  }
-
-  .search-input {
-    padding: 1rem 1.3rem;
-    font-size: 1rem;
-  }
-
-  .search-button {
-    width: 50px;
-    height: 50px;
-  }
-}
-
-@media (max-width: 768px) {
-  .search-container {
-    max-width: 400px;
-    margin: 0 1rem;
-    order: 3;
-    width: 100%;
-    margin-top: 1rem;
-  }
-
-  .search-box {
-    border-radius: 25px;
-  }
-
-  .search-input {
-    padding: 0.9rem 1.2rem;
-    font-size: 0.95rem;
-  }
-
-  .search-button {
-    width: 45px;
-    height: 45px;
-  }
-
-  .search-icon {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .search-input {
-    padding: 0.8rem 1rem;
-    font-size: 0.9rem;
-  }
-
-  .search-input::placeholder {
-    font-size: 0.9rem;
-  }
-
-  .search-button {
-    width: 40px;
-    height: 40px;
-  }
-
-  .search-icon {
-    font-size: 1.1rem;
-  }
-}
-
-/* Эффект для темной темы */
-@media (prefers-color-scheme: dark) {
-  .search-box {
-    background: linear-gradient(145deg, #2d3748, #1a202c);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(255, 193, 7, 0.15);
-  }
-
-  .search-input {
-    color: #e2e8f0;
-  }
-
-  .search-input::placeholder {
-    color: #a0aec0;
-  }
-}
-
-/* Анимация загрузки */
-.search-loading .search-icon {
-  animation: searchSpin 1s linear infinite;
-}
-
-@keyframes searchSpin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Стили для сообщений поиска */
-.search-message {
-  margin: 20px 0;
-  padding: 30px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-radius: 12px;
-  text-align: center;
-  border-left: 4px solid #ff6b35;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.search-message h3 {
-  color: #2c3e50;
-  margin-bottom: 15px;
-  font-size: 1.4rem;
-  font-weight: 600;
-}
-
-.search-message p {
-  color: #6c757d;
-  margin: 0;
-  font-size: 1.1rem;
-}
-
-/* Стили для подсказок */
-.search-suggestions {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: white;
-  border-radius: 12px;
-  margin-top: 8px;
-  padding: 12px 0;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.search-container:focus-within .search-suggestions {
-  display: block;
 }
 
 .suggestion-item {

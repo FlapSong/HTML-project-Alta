@@ -10,9 +10,8 @@
     <link rel="stylesheet" href="css/basket-btn.css">
     <link rel="stylesheet" href="css/login-btn.css">
     <link rel="stylesheet" href="css/header.css">
-    <script src="js/search.js"></script>
-    <script src="js/basket-btn.js"></script>
-    <script src="js/scroll header.js"></script>
+    <link rel="stylesheet" href="css/basket.css">
+    <link rel="stylesheet" href="css/auth-style.css">
 </head>
 
 <body>
@@ -27,20 +26,18 @@
             </div>
 
             <!--поиск -->
-            <nav class="header-nav">
-                <div class="header-search">
-                    <div class="search-box">
-                        <input type="text" class="search-input" placeholder="Поиск товаров и категорий..."
-                            aria-label="Поиск товаров" id="searchInput">
-                    </div>
-
-                    <div class="search-suggestions">
-                        <div class="suggestion-item" data-search="худи">Худи мужские</div>
-                        <div class="suggestion-item" data-search="футболка">Футболки мужские</div>
-                        <div class="suggestion-item" data-search="шорты">Шорты мужские</div>
-                    </div>
+            <div class="header-search">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Поиск товаров и категорий..."
+                        aria-label="Поиск товаров" id="searchInput">
                 </div>
-            </nav>
+
+                <div class="search-suggestions">
+                    <div class="suggestion-item" data-search="футболка">Футболки мужские</div>
+                    <div class="suggestion-item" data-search="кроссовки">Кроссовки мужские</div>
+                    <div class="suggestion-item" data-search="джинсы">Джинсы мужские</div>
+                </div>
+            </div>
 
             <!-- Кнопки действий -->
             <div class="header-actions">
@@ -82,7 +79,14 @@
 
             <!-- Пустая корзина -->
             <div class="empty-basket">
-                <div class="empty-basket-icon">🛒</div>
+                <div class="empty-basket-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M3 6h18l-2 10H5L3 6zm0 0l1-3h16l1 3" stroke-linecap="round" />
+                        <path d="M9 10v4m6-4v4" stroke-linecap="round" />
+                        <circle cx="9" cy="19" r="1" />
+                        <circle cx="17" cy="19" r="1" />
+                    </svg>
+                </div>
                 <h2>Ваша корзина пуста</h2>
                 <p>Добавьте товары из каталога, чтобы сделать заказ</p>
                 <a href="index.html" class="btn primary">Вернуться к покупкам</a>
@@ -95,6 +99,9 @@
             <p>&copy; 2025 Altiers. Все права защищены.</p>
         </div>
     </footer>
+    <script src="js/search.js"></script>
+    <script src="js/basket-btn.js"></script>
+    <script src="js/scroll header.js"></script>
 </body>
 
 </html>

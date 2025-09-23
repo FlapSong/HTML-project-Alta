@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/basket-btn.css">
   <link rel="stylesheet" href="css/login-btn.css">
   <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/auth-style.css">
 </head>
 
 <body>
@@ -26,8 +27,8 @@
       <!-- Поиск-->
       <div class="header-search">
         <div class="search-box">
-          <input type="text" class="search-input" placeholder="Поиск товаров и категорий..."
-            aria-label="Поиск товаров" id="searchInput">
+          <input type="text" class="search-input" placeholder="Поиск товаров и категорий..." aria-label="Поиск товаров"
+            id="searchInput">
         </div>
 
         <div class="search-suggestions">
@@ -70,6 +71,65 @@
     </div>
   </header>
 
+
+  <!--авторизации -->
+  <div class="wb-auth-modal" id="authModal">
+    <div class="wb-auth-content">
+      <!-- Заголовок и кнопка закрытия -->
+      <div class="wb-auth-header">
+        <h2 class="wb-auth-title">Вход по номеру телефона</h2>
+        <button class="wb-auth-close" id="closeAuth">
+          <span>×</span>
+        </button>
+      </div>
+
+      <!-- Форма ввода телефона -->
+      <form class="wb-auth-form active" id="phoneForm">
+        <div class="wb-form-group">
+          <label class="wb-form-label">Номер телефона</label>
+          <input type="tel" class="wb-form-input" id="phoneInput" placeholder="+7 (___) ___-__-__" required>
+          <div class="wb-form-hint">На этот номер придет код подтверждения</div>
+        </div>
+
+        <button type="submit" class="wb-auth-submit">Получить код</button>
+
+        <div class="wb-auth-agreement">
+          Нажимая «Получить код», вы соглашаетесь с
+          <a href="#" class="wb-agreement-link">условиями обработки персональных данных</a>
+        </div>
+      </form>
+
+      <!-- Форма ввода кода -->
+      <form class="wb-auth-form" id="codeForm">
+        <div class="wb-code-header">
+          <button type="button" class="wb-back-btn" id="backBtn">← Назад</button>
+          <div class="wb-code-info">
+            <div class="wb-code-phone" id="codePhone">+7 (900) 123-45-67</div>
+            <button type="button" class="wb-change-phone" id="changePhone">Изменить номер</button>
+          </div>
+        </div>
+
+        <div class="wb-form-group">
+          <label class="wb-form-label">Код из СМС</label>
+          <div class="wb-code-inputs">
+            <input type="text" class="wb-code-input" maxlength="1" required>
+            <input type="text" class="wb-code-input" maxlength="1" required>
+            <input type="text" class="wb-code-input" maxlength="1" required>
+            <input type="text" class="wb-code-input" maxlength="1" required>
+          </div>
+          <div class="wb-code-timer">
+            Отправить код повторно через: <span id="timer">59</span> сек.
+          </div>
+          <button type="button" class="wb-resend-code" id="resendCode" disabled>Отправить код еще раз</button>
+        </div>
+
+        <button type="submit" class="wb-auth-submit">Войти</button>
+      </form>
+    </div>
+  </div>
+
+
+
   <main class="container">
     <div class="wb-products-grid">
       <!-- карточка 1 -->
@@ -103,7 +163,7 @@
         </div>
       </div>
 
-       <!-- карточка 2 -->
+      <!-- карточка 2 -->
       <div class="wb-product-card">
         <div class="wb-product-image">
           <img src="https://cdn1.ozone.ru/s3/multimedia-y/6338760862.jpg" alt="Мужская футболка"
@@ -401,7 +461,7 @@
       <p>&copy; 2025 Altiers. Все права защищены.</p>
     </div>
   </footer>
-  <script  src="js/search.js"></script>
+  <script src="js/search.js"></script>
   <script src="js/basket-btn.js"></script>
   <script src="js/scroll header.js"></script>
 </body>
