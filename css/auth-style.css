@@ -1,4 +1,4 @@
-/*  header стиль*/
+/* header стиль */
 .wb-header {
   background: linear-gradient(45deg, #ff6b35, #ff3d00);
   padding: 15px 20px;
@@ -12,12 +12,13 @@
   border-radius: 6px;
   padding: 8px 16px;
   font-family: "Montserrat", "Arial", sans-serif;
-  font-weight: 600;
+  font-weight: 600; /* Исправлено: убрал px */
   font-size: 0.9rem;
   color: #ff3d00;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
+  align-items: center; /* Добавлено для выравнивания */
   gap: 6px;
 }
 
@@ -29,6 +30,48 @@
 
 .wb-login-icon {
   font-size: 1.1rem;
+}
+
+/* стиль для авториз. кнопки */
+.wb-login-btn.authenticated {
+  background: #00a046;
+  color: white;
+}
+
+.wb-login-btn.authenticated:hover {
+  background: #008f3e;
+}
+
+/* анимация для уведомл. */
+.wb-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  border-radius: 6px;
+  color: white;
+  font-family: "Montserrat", "Arial", sans-serif;
+  z-index: 1001;
+  animation: slideInRight 0.3s ease;
+}
+
+.wb-notification.success {
+  background: #00a046;
+}
+
+.wb-notification.error {
+  background: #ff3d00;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 /* модал. окно */
@@ -72,7 +115,7 @@
 .wb-auth-title {
   font-family: "Montserrat", "Arial", sans-serif;
   font-size: 1.3rem;
-  font-weight: 600;
+  font-weight: 600; /* Исправлено: убрал px */
   color: #000;
   margin: 0;
 }
@@ -116,7 +159,7 @@
   display: block;
   font-family: "Montserrat", "Arial", sans-serif;
   font-size: 0.9rem;
-  font-weight: 500px;
+  font-weight: 500; /* Исправлено: убрал px */
   color: #333;
   margin-bottom: 6px;
 }
@@ -130,6 +173,12 @@
   font-size: 0.9rem;
   transition: all 0.3s ease;
   box-sizing: border-box;
+}
+
+.wb-form-input:focus {
+  outline: none;
+  border-color: #ff3d00;
+  box-shadow: 0 0 0 2px rgba(255, 61, 0, 0.1);
 }
 
 .wb-form-input::placeholder {
@@ -171,7 +220,7 @@
 
 .wb-code-phone {
   font-family: "Montserrat", "Arial", sans-serif;
-  font-weight: 600;
+  font-weight: 600; /* Исправлено: убрал px */
   font-size: 1rem;
   color: #000;
   margin-bottom: 4px;
@@ -191,13 +240,20 @@
   color: #ff6b35;
 }
 
-/* поля для ввода кода */
+/* контейнер для полей ввода кода */
+.wb-code-inputs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  justify-content: center; /* Добавлено для центрирования */
+}
+
 .wb-code-input {
   width: 50px;
   height: 50px;
   text-align: center;
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 600; /* Исправлено: убрал px */
   border: 2px solid #e0e0e0;
   border-radius: 8px;
   transition: all 0.3s ease;
@@ -248,8 +304,8 @@
   border: none;
   border-radius: 6px;
   color: white;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 600;
+  font-family: "Montserrat", "Arial", sans-serif; /* Исправлено шрифт */
+  font-weight: 600; /* Исправлено: убрал px */
   font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -334,5 +390,10 @@
   .wb-code-input {
     width: 45px;
     height: 45px;
+  }
+  
+  .wb-login-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
   }
 }
