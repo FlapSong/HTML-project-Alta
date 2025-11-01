@@ -1,4 +1,3 @@
-/* basket.css */
 .basket-content {
   padding: 2rem 0;
   min-height: 60vh;
@@ -11,6 +10,176 @@
   font-size: 2.5rem;
 }
 
+/* стили для товаров в корзине */
+.basket-items-container {
+  margin-bottom: 2rem;
+}
+
+.basket-item {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.3 ease;
+  border: 1px solid #f0f0f0;
+}
+
+.basket-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+}
+
+.basket-item-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-right: 1.5rem;
+  flex-shrink: 0;
+}
+
+.basket-item-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.basket-item-info {
+  flex: 1;
+  margin-left: 1.5rem;
+}
+
+.basket-item-title {
+  font-family: "Montserrat", "Arial", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.basket-item-price {
+  font-family: "Montserrat", "Arial", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ff3d00;
+}
+
+.basket-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 0.5rem; 
+}
+
+.quantity-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.quantity-btn:hover {
+  background: #ff6b35;
+  color: white;
+}
+
+.quantity-display {
+  font-family: "Montserrat", "Arial", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  min-width: 30px;
+  text-align: center;
+}
+
+.remove-btn {
+  background: #ff4757;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-family: "Montserrat", "Arial", sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.remove-btn:hover {
+  background: #ff3742;
+  transform: translateY(-1px);
+}
+
+/* итоговая сумма */
+.basket-summary {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.summaty-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 2px solid #f0f0f0;
+}
+
+.toal-label {
+  font-family: "Montserrat", "Arial", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.total-amount {
+  font-family: "Montserrat", "Arial", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ff3d00;
+}
+
+.checkout-btn {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #00a046, #00c853);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: "Montserrat", "Arial", sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3 ease;
+}
+
+.checkout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 168, 70, 0.3);
+}
+
+/* пустая корзина */
 .empty-basket {
   text-align: center;
   padding: 3rem;
@@ -82,5 +251,34 @@
   }
   60% {
     transform: translateY(-5px);
+  }
+}
+
+/* адаптивность */
+@media (max-width: 768px) {
+  .basket-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .basket-item-image {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .basket-item-info {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .basket-item-controls {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .summary-total {
+    flex-direction: column;
+    gap: 1rem;
   }
 }

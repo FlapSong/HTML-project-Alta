@@ -7,8 +7,6 @@
     <title>Altiers - корзина</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/product card-style.css">
-    <link rel="stylesheet" href="css/basket-btn.css">
-    <link rel="stylesheet" href="css/login-btn.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/basket.css">
     <link rel="stylesheet" href="css/auth-style.css">
@@ -77,8 +75,21 @@
         <div class="basket-content">
             <h1>Корзина покупок</h1>
 
+            <!-- контейнер для товаров -->
+             <div class="basket-items-container" id="basketItems">
+             </div>
+
+             <!-- итог сумма -->
+              <div class="basket-summary" id="basketSummary" style="display: none;">
+                <div class="summary-total">
+                    <span class="total-label">Итого:</span>
+                    <span class="total-amount" id="totalAmount">0 руб</span>
+                </div>
+                <button class="btn primary checkout-btn" id="checkoutBtn">Оформить заказ</button>
+              </div>
+
             <!-- Пустая корзина -->
-            <div class="empty-basket">
+            <div class="empty-basket" id="emptyBasket">
                 <div class="empty-basket-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <path d="M3 6h18l-2 10H5L3 6zm0 0l1-3h16l1 3" stroke-linecap="round" />
@@ -99,6 +110,7 @@
             <p>&copy; 2025 Altiers. Все права защищены.</p>
         </div>
     </footer>
+    <script src="js/basket.js"></script>
     <script src="js/search.js"></script>
     <script src="js/basket-btn.js"></script>
     <script src="js/scroll header.js"></script>
