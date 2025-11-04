@@ -216,3 +216,114 @@ nav ul li a.active {
   border-left-color: #ff6b35;
   padding-left: 24px;
 }
+
+/* Стили для уведомлений */
+.wb-notification {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e0e0e0;
+  z-index: 10000;
+  max-width: 400px;
+  animation: slideInRight 0.3s ease;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.wb-notification.success {
+  border-left: 4px solid #00a046;
+}
+
+.wb-notification-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #00a046;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wb-notification-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: white;
+}
+
+.wb-notification-content {
+  flex: 1;
+}
+
+.wb-notification-title {
+  font-family: "Montserrat", "Arial", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.wb-notification-message {
+  font-family: "Montserrat", "Arial", sans-serif;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+.wb-notification-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #999;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.wb-notification-close:hover {
+  background: #f5f5f5;
+  color: #000;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.wb-notification.hiding {
+  animation: slideOutRight 0.3s ease;
+}
+
+/* Стиль для ошибок уведомлений */
+.wb-notification.error {
+  border-left: 4px solid #ff3d00;
+}
+
+.wb-notification.error .wb-notification-icon {
+  background: #ff3d00;
+}

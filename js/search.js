@@ -7,6 +7,9 @@ class ProductSearch {
     this.allProducts = [];
     this.searchTimeout = null;
 
+    // Определяем тип страницы
+    this.isBasketPage = window.location.pathname.includes("basket.html");
+
     this.init();
   }
 
@@ -16,12 +19,26 @@ class ProductSearch {
       return;
     }
 
-    if (!this.productsGrid) {
-      console.log("Products grid not found");
-      return;
+    // Для главной страницы загружаем товары
+    if (!this.isBasketPage) {
+      if (!this.productsGrid) {
+        console.log("Products grid not found");
+        return;
+      }
+      this.loadProducts();
+
+      // Автозаполнение поиска из URL параметра и выполнение поиска
+      const urlParams = new URLSearchParams(window.location.search);
+      const searchQuery = urlParams.get("search");
+      if (searchQuery) {
+        this.searchInput.value = searchQuery;
+        // Выполняем поиск после небольшой задержки, чтобы товары успели загрузиться
+        setTimeout(() => {
+          this.performSearch(searchQuery);
+        }, 100);
+      }
     }
 
-    this.loadProducts();
     this.setupEventListeners();
   }
 
@@ -40,16 +57,28 @@ class ProductSearch {
   }
 
   setupEventListeners() {
-    // Поиск при вводе
+    // Поиск при вводе (только для главной страницы)
     this.searchInput.addEventListener("input", (e) => {
       this.handleSearchInput(e.target.value);
     });
 
-    // Enter для поиска
+    // Enter для поиска - работает на обеих страницах
     this.searchInput.addEventListener("keypress", (e) => {
       if (e.key === "Enter") {
-        this.performSearch(e.target.value);
-        this.hideSuggestions();
+        const query = e.target.value.trim();
+        if (query) {
+          if (this.isBasketPage) {
+            // На странице корзины - сразу переходим на главную с поиском
+            e.preventDefault();
+            window.location.href = `index.html?search=${encodeURIComponent(
+              query
+            )}`;
+          } else {
+            // На главной - выполняем поиск
+            this.performSearch(query);
+            this.hideSuggestions();
+          }
+        }
       }
     });
 
@@ -60,7 +89,7 @@ class ProductSearch {
       }
     });
 
-    // Фокус на поле ввода
+    // Фокус на поле ввода - показываем подсказки
     this.searchInput.addEventListener("focus", () => {
       this.showSuggestions(this.searchInput.value);
     });
@@ -68,10 +97,20 @@ class ProductSearch {
     // Обработка кликов по подсказкам
     if (this.searchSuggestions) {
       this.searchSuggestions.addEventListener('click', (e) => {
-        if (e.target.classList.contains('suggestion-item')) {
-          this.searchInput.value = e.target.textContent;
-          this.performSearch(e.target.textContent);
-          this.hideSuggestions();
+        const suggestionItem = e.target.closest('.suggestion-item');
+        if (suggestionItem && !suggestionItem.classList.contains('no-results')) {
+          // Берем текст из data-атрибута, чтобы избежать проблем с HTML-разметкой
+          const query = suggestionItem.getAttribute('data-suggestion-text');
+          
+          if (this.isBasketPage) {
+            // На странице корзины - перенаправляем на главную с поиском
+            window.location.href = `index.html?search=${encodeURIComponent(query)}`;
+          } else {
+            // На главной странице - выполняем поиск
+            this.searchInput.value = query;
+            this.performSearch(query);
+            this.hideSuggestions();
+          }
         }
       });
     }
@@ -82,14 +121,22 @@ class ProductSearch {
 
     if (searchTerm.length > 0) {
       this.showSuggestions(searchTerm);
-      // Поиск с задержкой
+
+      if (this.isBasketPage) {
+        // На корзине - только подсказки, без автопоиска
+        return;
+      }
+
+      // На главной - поиск с задержкой
       clearTimeout(this.searchTimeout);
       this.searchTimeout = setTimeout(() => {
         this.performSearch(searchTerm);
       }, 300);
     } else {
       this.hideSuggestions();
-      this.showAllProducts();
+      if (!this.isBasketPage) {
+        this.showAllProducts();
+      }
     }
   }
 
@@ -98,14 +145,14 @@ class ProductSearch {
 
     const suggestions = this.getSuggestions(query);
     this.renderSuggestions(suggestions);
-    this.searchSuggestions.classList.add('show');
+    this.searchSuggestions.classList.add("show");
   }
 
   getSuggestions(query) {
     const lowerQuery = query.toLowerCase();
     const allSuggestions = [
       "худи мужское",
-      "футболка мужская", 
+      "футболка мужская",
       "шорты мужские",
       "джинсы мужские",
       "кроссовки мужские",
@@ -128,11 +175,10 @@ class ProductSearch {
 
     if (suggestions.length === 0) {
       const noResults = document.createElement("div");
-      noResults.className = "suggestion-item";
+      noResults.className = "suggestion-item no-results";
       noResults.textContent = "Ничего не найдено";
       noResults.style.color = "#999";
       noResults.style.cursor = "default";
-      noResults.onclick = null;
       this.searchSuggestions.appendChild(noResults);
       return;
     }
@@ -140,7 +186,28 @@ class ProductSearch {
     suggestions.forEach((suggestion) => {
       const item = document.createElement("div");
       item.className = "suggestion-item";
-      item.textContent = suggestion;
+      
+      // Сохраняем оригинальный текст подсказки в data-атрибут
+      item.setAttribute('data-suggestion-text', suggestion);
+      
+      if (this.isBasketPage) {
+        // На корзине - добавляем красивую стрелочку
+        item.innerHTML = `
+          <span class="suggestion-text">${suggestion}</span>
+          <span class="suggestion-arrow">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </span>
+        `;
+        item.style.display = "flex";
+        item.style.alignItems = "center";
+        item.style.justifyContent = "space-between";
+      } else {
+        // На главной - обычный текст (без стрелочек)
+        item.textContent = suggestion;
+      }
+      
       item.setAttribute('data-search', suggestion.toLowerCase());
       this.searchSuggestions.appendChild(item);
     });
@@ -148,16 +215,27 @@ class ProductSearch {
 
   performSearch(query) {
     const searchTerm = query.toLowerCase().trim();
-    
+
     if (searchTerm === "") {
-      this.showAllProducts();
+      if (!this.isBasketPage) {
+        this.showAllProducts();
+      }
       return;
     }
 
+    // На странице корзины - сразу переходим на главную
+    if (this.isBasketPage) {
+      window.location.href = `index.html?search=${encodeURIComponent(
+        searchTerm
+      )}`;
+      return;
+    }
+
+    // УЛУЧШЕННЫЙ ПОИСК: ищем по частичному совпадению
     const results = this.allProducts.filter((product) =>
       product.title.includes(searchTerm)
     );
-    
+
     this.displaySearchResults(results, searchTerm);
   }
 
@@ -167,7 +245,7 @@ class ProductSearch {
       product.element.style.display = "none";
     });
 
-    // Показываем результаты
+    // Показываем ТОЛЬКО результаты поиска
     results.forEach((result) => {
       result.element.style.display = "block";
     });
@@ -200,6 +278,7 @@ class ProductSearch {
       message.innerHTML = `
         <h3 style="color: #6c757d; margin-bottom: 1rem;">😔 Ничего не найдено</h3>
         <p style="color: #495057; margin: 0;">По запросу "<strong>${query}</strong>" товаров не найдено.</p>
+        <p style="color: #666; margin-top: 0.5rem;">Попробуйте изменить запрос</p>
       `;
     } else {
       message.innerHTML = `
@@ -222,12 +301,7 @@ class ProductSearch {
 
   hideSuggestions() {
     if (this.searchSuggestions) {
-      this.searchSuggestions.classList.remove('show');
+      this.searchSuggestions.classList.remove("show");
     }
   }
 }
-
-// Инициализация при загрузке DOM
-document.addEventListener("DOMContentLoaded", function () {
-  new ProductSearch();
-});

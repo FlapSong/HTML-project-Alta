@@ -30,11 +30,7 @@
                         aria-label="Поиск товаров" id="searchInput">
                 </div>
 
-                <div class="search-suggestions">
-                    <div class="suggestion-item" data-search="футболка">Футболки мужские</div>
-                    <div class="suggestion-item" data-search="кроссовки">Кроссовки мужские</div>
-                    <div class="suggestion-item" data-search="джинсы">Джинсы мужские</div>
-                </div>
+                <div class="search-suggestions"></div>
             </div>
 
             <!-- Кнопки действий -->
@@ -73,29 +69,69 @@
     <!-- Содержимое корзины -->
     <main class="container">
         <div class="basket-content">
-            <h1>Корзина покупок</h1>
-
-            <!-- контейнер для товаров -->
-             <div class="basket-items-container" id="basketItems">
-             </div>
-
-             <!-- итог сумма -->
-              <div class="basket-summary" id="basketSummary" style="display: none;">
-                <div class="summary-total">
-                    <span class="total-label">Итого:</span>
-                    <span class="total-amount" id="totalAmount">0 руб</span>
+            <h1>Корзина</h1>
+            
+            <div class="basket-container">
+                <!-- Левая часть - товары -->
+                <div class="basket-items-section">
+                    <div class="basket-header">
+                        <div class="basket-count" id="basketCount">2 товара</div>
+                        <button class="basket-clear" id="clearBasket">Очистить корзину</button>
+                    </div>
+                    
+                    <div class="basket-items-container" id="basketItems">
+                        <!-- Товары будут добавляться динамически -->
+                    </div>
                 </div>
-                <button class="btn primary checkout-btn" id="checkoutBtn">Оформить заказ</button>
-              </div>
-
+                
+                <!-- Правая часть - итоги -->
+                <div class="basket-summary-section">
+                    <h3 class="summary-title">Ваш заказ</h3>
+                    
+                    <div class="delivery-address">
+                        <div class="address-title">Адрес доставки</div>
+                        <select class="address-select">
+                            <option>Выбрать адрес доставки</option>
+                            <option>Москва, ул. Примерная, д. 1</option>
+                        </select>
+                    </div>
+                    
+                    <div class="summary-details">
+                        <div class="summary-row">
+                            <span id="itemsCount">Товары (2 шт)</span>
+                            <span id="itemsTotal">6 540 ₽</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Скидка</span>
+                            <span class="summary-discount" id="discountAmount">-3 408 ₽</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Доставка</span>
+                            <span>Бесплатно</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Итого</span>
+                            <span id="totalAmount">3 132 ₽</span>
+                        </div>
+                    </div>
+                    
+                    <button class="checkout-btn" id="checkoutBtn">Заказать</button>
+                    
+                    <div class="summary-agreement">
+                        Нажимая «Заказать», вы соглашаетесь с 
+                        <a href="#" class="agreement-link">правилами пользования торговой площадкой и возврата</a>
+                    </div>
+                </div>
+            </div>
+            
             <!-- Пустая корзина -->
-            <div class="empty-basket" id="emptyBasket">
+            <div class="empty-basket" id="emptyBasket" style="display: none;">
                 <div class="empty-basket-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M3 6h18l-2 10H5L3 6zm0 0l1-3h16l1 3" stroke-linecap="round" />
-                        <path d="M9 10v4m6-4v4" stroke-linecap="round" />
-                        <circle cx="9" cy="19" r="1" />
-                        <circle cx="17" cy="19" r="1" />
+                        <path d="M3 6h18l-2 10H5L3 6zm0 0l1-3h16l1 3" stroke-linecap="round"/>
+                        <path d="M9 10v4m6-4v4" stroke-linecap="round"/>
+                        <circle cx="9" cy="19" r="1"/>
+                        <circle cx="17" cy="19" r="1"/>
                     </svg>
                 </div>
                 <h2>Ваша корзина пуста</h2>
@@ -110,10 +146,9 @@
             <p>&copy; 2025 Altiers. Все права защищены.</p>
         </div>
     </footer>
-    <script src="js/basket.js"></script>
     <script src="js/search.js"></script>
-    <script src="js/basket-btn.js"></script>
-    <script src="js/scroll header.js"></script>
+    <script src="js/basket.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
